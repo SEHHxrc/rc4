@@ -1,2 +1,2 @@
 # rc4_python
-Implementation of the stream cipher(python3)
+Implementation of the Rivest Cipher 4
