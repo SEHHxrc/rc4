@@ -33,6 +33,7 @@ int main(int argc, char const *argv[])
 		encrypt(&rc4, result);
 	else
 		decrypt(&rc4, result);
+	printf("%s\n", result);
 	return 0;
 }
 
@@ -42,6 +43,10 @@ void exchange(unsigned char *a, unsigned char *b)
 	*b ^= *a;
 	*a ^= *b;
 }
+/* 
+A new strlen function which can used for both constant and variable strings
+The strlen function in string.h is only useful for const char * type parameter
+*/
 unsigned int len(unsigned char *string)
 {
 	int count = 0;
@@ -52,7 +57,7 @@ unsigned int len(unsigned char *string)
 	return count;
 }
 
-void init(RC4 *rc4)
+void init(RC4 *rc4) // initialize the struct
 {
 	rc4->i = rc4->j = 0;
 	memset(rc4->s, 0, sizeof(unsigned char)*256);
@@ -87,7 +92,6 @@ void encrypt(RC4 *rc4, unsigned char *text)
 	for (int i = 0; text[i]; ++i)
 	{
 		text[i] ^= prga(rc4);
-		printf("%c", text[i]);
 	}
 }
 void decrypt(RC4 *rc4, unsigned char *text)
